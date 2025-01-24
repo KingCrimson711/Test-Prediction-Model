@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo RV</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            background-image: url('img3.png');
+            background-size: cover;
+            background-position: center; 
+            background-attachment: fixed;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px 30px;
+            box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 
+                        0px 4px 5px 0px rgba(0, 0, 0, 0.14), 
+                        0px 1px 10px 0px rgba(0, 0, 0, 0.12);  /* Updated shadow effect */
+        }
+        .navbar .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none; /* Remove underline */
+        }
+        .navbar .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .profile .avatar {
+            width: 50px;
+            height: 64px;
+            background-color: #ffcccc;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);  /* Semi-transparent background */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .popular-features {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .feature {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .feature:hover {
+            transform: translateY(-7px);
+            background-color: #e6e6e6;
+        }
+
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+        }
+
+        .feature-description {
+            font-size: 1.4rem;
+            color: #555;
+        }
+
+        .recent {
+            margin-top: 50px;
+        }
+
+        .recent h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .recent-items {
+            background-color: #f4f4f4;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            color: #777;
+            font-size: 1.4rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">RootVestors </div>
+        <div class="profile">
+            <div class="notifications"></div>
+            <div class="avatar"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Welcome Back</h1>
+
+        <div class="popular-features">
+            <a href="workshops.html" class="feature">
+                <div class="feature-icon" style="background-image: url('img1.jpeg');"></div>
+                <div>Workshops</div>
+                <p class="feature-description">Enhance your skills with expert-led workshops. Explore upcoming sessions.</p>
+            </a>
+            <a href="http://127.0.0.1:5000/" class="feature">
+                <div class="feature-icon" style="background-image: url('img2.png');"></div>
+                <div>Quizzes</div>
+                <p class="feature-description">Know how well you stack up and see upcoming quizzes.</p>
+            </a>
+        </div>
+
+        <div class="recent">
+            <h2>Recently viewed</h2>
+            <div class="recent-items">No recent presentations</div>
+        </div>
+    </div>
+</body>
+</html>

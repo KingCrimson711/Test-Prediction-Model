@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - RootVestors</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            background-image: url('img3.png'); /* Add background image here */
+            background-size: cover;  /* Ensures the image covers the entire page */
+            background-position: center;  /* Centers the background image */
+            background-attachment: fixed; /* Keeps the image fixed while scrolling */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .navbar .profile {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .profile .avatar {
+            width: 35px;
+            height: 35px;
+            background-color: #ffcccc;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);  /* Semi-transparent background */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .upcoming-quizzes {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .upcoming-quizzes h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .upcoming-quizzes .quiz-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #e7f7e7;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #333;
+        }
+        .upcoming-quizzes .quiz-item span {
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fafafa;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #28a745;
+            background-color: #fff;
+        }
+        .form-group input[type="number"], .form-group select {
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .loading-button {
+            background-color: #ffc107;
+            cursor: not-allowed;
+        }
+        .loading-button:hover {
+            background-color: #e0a800;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            display: none;
+        }
+        .result.success {
+            background-color: #e0f7e0;
+            border-left: 5px solid #28a745;
+        }
+        .result.error {
+            background-color: #ffcccc;
+            border-left: 5px solid #dc3545;
+        }
+        .result ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .result ul li {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">RootVestors</div>
+        <div class="profile">
+            <div class="notifications">🔔</div>
+            <div class="avatar"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="upcoming-quizzes">
+            <h2>Upcoming Quizzes</h2>
+            <div class="quiz-item">
+                <span>Math Quiz</span>
+                <span>Feb 10, 2025</span>
+            </div>
+            <div class="quiz-item">
+                <span>Science Quiz</span>
+                <span>Feb 15, 2025</span>
+            </div>
+            <div class="quiz-item">
+                <span>History Quiz</span>
+                <span>Feb 20, 2025</span>
+            </div>
+        </div>
+
+        <h1>Performance Prediction</h1>
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="hoursStudied">Hours Studied</label>
+                <input type="number" id="hoursStudied" name="hours_studied" required>
+            </div>
+            <div class="form-group">
+                <label for="previousScores">Previous Scores</label>
+                <input type="number" id="previousScores" name="previous_scores" required>
+            </div>
+            <div class="form-group">
+                <label for="extracurricular">Extracurricular Activities</label>
+                <select id="extracurricular" name="extracurricular_activities" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sleepHours">Sleep Hours</label>
+                <input type="number" id="sleepHours" name="sleep_hours" required>
+            </div>
+            <div class="form-group">
+                <label for="samplePapers">Sample Question Papers Practiced</label>
+                <input type="number" id="samplePapers" name="sample_question_papers_practiced" required>
+            </div>
+            <button type="button" id="submitButton" onclick="submitForm()">Predict</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function submitForm() {
+            const form = document.getElementById('predictionForm');
+            const formData = new FormData(form);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                data[key] = key === 'extracurricular_activities' ? value : parseFloat(value);
+            });
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.classList.add('loading-button');
+            submitButton.textContent = 'Predicting...';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                const resultDiv = document.getElementById('result');
+                
+                if (result.error) {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<strong>Error:</strong> ${result.error}`;
+                } else {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>Predicted Performance Index:</strong> ${result.predicted_performance_index}<br>
+                        <strong>Suggestions:</strong>
+                        <ul>${result.suggestions.map(s => `<li>${s}</li>`).join('')}</ul>
+                    `;
+                }
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                const resultDiv = document.getElementById('result');
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+                resultDiv.style.display = 'block';
+            } finally {
+                submitButton.classList.remove('loading-button');
+                submitButton.textContent = 'Predict';
+            }
+        }
+    </script>
+</body>
+</html>

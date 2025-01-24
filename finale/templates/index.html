@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+            color: #333333; /* Dark text for readability */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50; /* Green background for navbar */
+            padding: 15px 30px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            color: #ffffff; /* White text */
+        }
+        .navbar .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff; /* White logo text */
+            text-decoration: none;
+        }
+        .navbar .profile .avatar {
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff; /* White avatar */
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f0f0f0; /* Light grey background */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1, h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4CAF50; /* Green color for headings */
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.2rem;
+            color: #4CAF50; /* Green label text */
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 1px solid #4CAF50; /* Green border */
+            background-color: #ffffff; /* White background */
+            color: #333333; /* Dark text */
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #4CAF50; /* Green button */
+            color: #ffffff; /* White text */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        .prediction {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333333; /* Dark text for prediction */
+        }
+        .suggestions {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333333; /* Dark text for suggestions */
+        }
+        .upcoming-quizzes {
+            background-color: #ffffff; /* White background for upcoming quizzes */
+            color: #4CAF50; /* Green text */
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Performance Predictor</div>
+        <div class="profile">
+            <div class="avatar"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Upcoming Quizzes Section -->
+        <div class="upcoming-quizzes">
+            <h2>Upcoming Quizzes</h2>
+            <p>No upcoming quizzes yet. They are in the making!</p>
+        </div>
+
+        <h1>See How You Stack Up</h1>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="hours_studied">Hours Studied:</label>
+                <input type="number" id="hours_studied" name="hours_studied" required>
+            </div>
+            <div class="form-group">
+                <label for="previous_scores">Previous Scores:</label>
+                <input type="number" id="previous_scores" name="previous_scores" required>
+            </div>
+            <div class="form-group">
+                <label for="extracurricular_activities">Extracurricular Activities:</label>
+                <select id="extracurricular_activities" name="extracurricular_activities" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sleep_hours">Sleep Hours:</label>
+                <input type="number" id="sleep_hours" name="sleep_hours" required>
+            </div>
+            <div class="form-group">
+                <label for="question_papers_practiced">Question Papers Practiced:</label>
+                <input type="number" id="question_papers_practiced" name="question_papers_practiced" required>
+            </div>
+            <button type="submit">Predict Performance Index</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="prediction">
+            <p>Predicted Performance Index: {{ prediction }}</p>
+        </div>
+        <div class="suggestions">
+            {% if prediction < 50 %}
+                <p><strong>Suggestion:</strong> Your performance is below average. Focus more on your studies and consider improving your time management.</p>
+            {% elif prediction >= 50 and prediction < 75 %}
+                <p><strong>Suggestion:</strong> Your performance is average. You're doing okay, but there’s room for improvement. Try to practice more sample papers and focus on weak areas.</p>
+            {% else %}
+                <p><strong>Suggestion:</strong> Excellent performance! Keep up the good work and continue practicing. You're on the right track.</p>
+            {% endif %}
+        </div>
+        <div class="percentile">
+            <p>Percentile: {{ percentile }}%</p>
+        </div>
+        {% else %}
+        <div class="prediction">
+            <p>No prediction yet. Fill out the form and submit to get a prediction.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
